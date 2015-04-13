@@ -18,18 +18,16 @@ class ItemRepository
      */
     private $all;
     
-    public function setItem(Item $item)
+    public function addToTop(Item $item)
     {
         $id = $item->getId();
         $this->top[$id] = $item;
-        $this->all[$id] = $item;
     }
     
-    public function addChild(Item $parent, Item $child)
+    public function addItem(Item $item)
     {
-        $parent->addChild($child);
-        $id = $child->getId();
-        $this->all[$id] = $child;
+        $id = $item->getId();
+        $this->all[$id] = $item;
     }
     
     public function getItem($id)

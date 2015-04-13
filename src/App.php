@@ -16,12 +16,15 @@ class App
     {
         $repos = new ItemRepository();
         
-        foreach ($data as $item) {
-            if ($item['parent_id'] === 0) {
-                $repos->setItem(new Item($item));
+        foreach ($data as $itemArray) {
+            $item = new Item($itemArray);
+            $repos->addItem($item);
+            
+            if ($itemArray['parent_id'] === 0) {
+                $repos->addToTop($item);
             } else {
-                $parent = $repos->getItem($item['parent_id']);
-                $repos->addChild($parent, new Item($item));
+                $parent = $repos->getItem($itemArray['parent_id']);
+                $parent->addChild($item);
             }
         }
 //        var_dump($repos->getTop()); exit;

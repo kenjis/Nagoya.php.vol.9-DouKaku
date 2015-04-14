@@ -56,11 +56,9 @@ class Renderer
         $indent = str_repeat(' ', $level * 4);
         
         foreach ($items as $item) {
+            $output .= $indent. '* ' . $item->getValue() . "\n";
             if ($item->hasChildren()) {
-                $output .= $indent. '* ' . $item->getValue() . "\n";
                 $output .= $this->getChildrenCli($item->getChildren(), $level + 1);
-            } else {
-                $output .= $indent . '* ' . $item->getValue() . "\n";
             }
         }
         
